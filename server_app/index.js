@@ -1,39 +1,44 @@
 const { ApolloServer, gql } = require('apollo-server');
 
+const typeDefs = gql`
+    type Book {
+        bookId: Int,
+        title: String,
+        author: String
+    }
+    type Query {
+        books:  [Book]
+    }
+`
 const books = [
     {
-        bookID: '111',
+        bookId: 111,
         title: 'The Awakening',
         author: 'Kate Chopin',
     },
     {
-        bookID: '222',
+        bookId: 222,
         title: 'City of Glass',
         author: 'Paul Auster',
     },
-];
+    {
+        bookId: 333,
+        title: 'The Road to learn React',
+        author: 'Robin Wieruch'
+    }
+]
 
 const resolvers = {
     Query: {
-      books: () => books,
-    },
-  };
-
-const typeDefs = gql`
-    type Book {
-        bookID: Int!
-        title: String!
-        author: String!
+        books: () => {
+            // write business logic here
+          return books
+        }
     }
-
-    type Query {
-        books: [Book]
-    }
-`;
+}
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-// The `listen` method launches a web server.
 server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+    console.log(`🚀  Server ready at ${url}`);
+})

@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 const GET_BOOKS = gql`
   query GetAllBooks {
     books {
-      bookID,
+      bookId,
       title,
       author
     }
@@ -14,20 +14,35 @@ const GET_BOOKS = gql`
 const Books = () => {
     const { loading, error, data } = useQuery(GET_BOOKS);
 
-    if (loading) {
-        return <h2>Loading...</h2>
-    }
-
-    if (error) {
-        return <h2>Error...</h2>
-    }
-
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
     const { books } = data;
-    console.log(books);
 
     return (
         <div>
-            <table style={{ border: '1px solid red', margin:'auto' }}>
+            <h2>Books List</h2>
+            <table border="1.5" style={{ margin : 'auto'}}>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Book ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                    </tr>
+                    {
+                        books.map(Book => {
+                            return (
+                                <tr key={Book.bookId}>
+                                    <td>{Book.bookId}</td>
+                                    <td>{Book.title}</td>
+                                    <td>{Book.author}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+            {/* <table style={{  }}>
                 <tbody>
                     {
                         books.map((book) => {
@@ -40,7 +55,7 @@ const Books = () => {
                         })
                     }
                 </tbody>
-            </table>
+            </table> */}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 {
   "name": "server_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "gql_server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.19.0",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "nodemon": "^2.0.6"
   }
 }
